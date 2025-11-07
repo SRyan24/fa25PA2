@@ -107,8 +107,11 @@ int buildEncodingTree(int nextFree) {
         int small2 = heap.pop(weightArr);
 
         //    - Create a new parent node with combined weight
-        int parent = nextFree;
-        nextFree++;
+        int parent = nextFree++;
+
+        // Parent internal node
+        charArr[parent] = '\0';
+
         weightArr[parent] = weightArr[small1] + weightArr[small2];
 
         //    - Set left/right pointers
@@ -131,9 +134,10 @@ void generateCodes(int root, string codes[]) {
 
     //Begin with empty root path
     stack.push(make_pair(root, ""));
-    //stack.pop();
 
+    // Until stack is empty...
     while (!stack.empty()) {
+        //Remove top
         pair<int, string> top = stack.top();
         stack.pop();
 
