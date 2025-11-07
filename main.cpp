@@ -35,6 +35,7 @@ int main() {
 
     // Step 3: Build encoding tree using your heap
     int root = buildEncodingTree(nextFree);
+    //cout << "Root index: " << root << endl;
 
     // Step 4: Generate binary codes using an STL stack
     string codes[26];
@@ -95,7 +96,7 @@ int buildEncodingTree(int nextFree) {
     // 1. Create a MinHeap object.
     MinHeap heap;
     // 2. Push all leaf node indices into the heap.
-    for (int i = 0; i < 26; ++i) {
+    for (int i = 0; i < nextFree; ++i) {
         heap.push(i, weightArr);
     }
 
@@ -124,13 +125,13 @@ int buildEncodingTree(int nextFree) {
 
 // Step 4: Use an STL stack to generate codes
 void generateCodes(int root, string codes[]) {
-    // TODO:
+    // DONE:
     // Use stack<pair<int, string>> to simulate DFS traversal.
     stack<pair<int, string>> stack;
 
     //Begin with empty root path
     stack.push(make_pair(root, ""));
-    stack.pop();
+    //stack.pop();
 
     while (!stack.empty()) {
         pair<int, string> top = stack.top();

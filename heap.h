@@ -42,14 +42,13 @@ struct MinHeap {
         downheap(0, weightArr);
 
         // Smallest index (removed in process)
-        return minIdx; // placeholder
+        return minIdx;
     }
 
-    void upheap(int pos, const int weightArr[]) { // CHANGED weightArr[] to const
-        // X: swap child upward while smaller than parent
-
+    void upheap(int pos, int weightArr[]) { // CHANGED weightArr[] to const
+        // DONE: swap child upward while smaller than parent
         //Continuous upheap until sorted
-        while (pos >0) {
+        while (pos > 0) {
             // ( i - 1 ) /2 : index formula
             int parent = (pos - 1)/2;
 
@@ -57,11 +56,11 @@ struct MinHeap {
             if (weightArr[data[pos]] < weightArr[data[parent]]) {
                 swap(data[pos], data[parent]);
                 pos = parent;
-            }
+            } else { break;} // LACK OF BREAK STATEMENT LEFT HUGE ERROR !!
         }
     }
 
-    void downheap(int pos, const int weightArr[]) { // CHANGED weightArr[] to const
+    void downheap(int pos, int weightArr[]) { // CHANGED weightArr[] to const
         // X: swap parent downward while larger than any child
         while (true) {
             // (i*2)+(1 or 2) Child position formula
@@ -70,10 +69,10 @@ struct MinHeap {
             int smallest = pos;
 
             //Find which child is smaller, assign to smallest
-            if (weightArr[data[childL]] < weightArr[data[smallest]]) {
+            if (childL < size && weightArr[data[childL]] < weightArr[data[smallest]]) {
                 smallest = childL;
             }
-            if (weightArr[data[childR]] < weightArr[data[smallest]]) {
+            if (childR < size && weightArr[data[childR]] < weightArr[data[smallest]]) {
                 smallest = childR;
             }
 
