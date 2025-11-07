@@ -6,6 +6,8 @@
 #include <stack>
 #include <string>
 #include "heap.h"
+
+
 using namespace std;
 
 // Global arrays for node information
@@ -114,9 +116,7 @@ int buildEncodingTree(int nextFree) {
 
         //    - Push new parent index back into the heap
         heap.push(parent, weightArr);
-
     }
-
     // 4. Return the index of the last remaining node (root)
 
     return heap.pop(weightArr);
@@ -126,8 +126,33 @@ int buildEncodingTree(int nextFree) {
 void generateCodes(int root, string codes[]) {
     // TODO:
     // Use stack<pair<int, string>> to simulate DFS traversal.
-    // Left edge adds '0', right edge adds '1'.
-    // Record code when a leaf node is reached.
+    stack<pair<int, string>> stack;
+
+    //Begin with empty root path
+    stack.push(make_pair(root, ""));
+    stack.pop();
+
+    while (!stack.empty()) {
+        pair<int, string> top = stack.top();
+        stack.pop();
+
+        int node = top.first;
+        string code = top.second;
+
+        // Left edge adds '0', right edge adds '1'.
+        if (leftArr[node] != -1) {
+            stack.push({leftArr[node], code + "0"});
+        }
+        if (rightArr[node] != -1) {
+            stack.push({rightArr[node], code + "1"});
+        }
+
+        // Record code when a leaf node is reached.
+        if (charArr[node] != '\0') {
+            codes[charArr[node] - 'a'] = code;
+        }
+    }
+
 }
 
 // Step 5: Print table and encoded message
