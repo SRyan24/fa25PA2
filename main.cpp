@@ -6,7 +6,7 @@
 #include <stack>
 #include <string>
 #include "heap.h"
-
+//#include "input.txt"
 
 using namespace std;
 
@@ -35,7 +35,8 @@ int main() {
 
     // Step 3: Build encoding tree using your heap
     int root = buildEncodingTree(nextFree);
-    //cout << "Root index: " << root << endl;
+
+    //cout << "Root index: " << root << endl; //bug check
 
     // Step 4: Generate binary codes using an STL stack
     string codes[26];
@@ -145,11 +146,11 @@ void generateCodes(int root, string codes[]) {
         string code = top.second;
 
         // Left edge adds '0', right edge adds '1'.
-        if (leftArr[node] != -1) {
-            stack.push({leftArr[node], code + "0"});
-        }
         if (rightArr[node] != -1) {
             stack.push({rightArr[node], code + "1"});
+        }
+        if (leftArr[node] != -1) {
+            stack.push({leftArr[node], code + "0"});
         }
 
         // Record code when a leaf node is reached.

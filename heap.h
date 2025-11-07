@@ -66,7 +66,7 @@ struct MinHeap {
             // (i*2)+(1 or 2) Child position formula
             int childL = (pos*2)+1;
             int childR = (pos*2)+2;
-            int smallest = pos;
+            int smallest = pos; //Temp assignment to be checked
 
             //Find which child is smaller, assign to smallest
             if (childL < size && weightArr[data[childL]] < weightArr[data[smallest]]) {
